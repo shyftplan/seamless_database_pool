@@ -20,9 +20,9 @@ module SeamlessDatabasePool
   # Adapter name to class name map. This exists because there isn't an obvious way to translate things like
   # sqlite3 to SQLite3. The adapters that ship with ActiveRecord are defined here. If you use
   # an adapter that doesn't translate directly to camel case, then add the mapping here in an initializer.
-  ADAPTER_TO_CLASS_NAME_MAP = {"sqlite" => "SQLite", "sqlite3" => "SQLite3", "postgresql" => "PostgreSQL"}
+  ADAPTER_TO_CLASS_NAME_MAP = {'sqlite' => 'SQLite', 'sqlite3' => 'SQLite3', 'postgresql' => 'PostgreSQL'}.freeze
 
-  READ_CONNECTION_METHODS = [:master, :persistent, :random]
+  READ_CONNECTION_METHODS = [:master, :persistent, :random].freeze
 
   class << self
     # Call this method to use a random connection from the read pool for every select statement.
