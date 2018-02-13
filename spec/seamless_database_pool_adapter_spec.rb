@@ -157,20 +157,26 @@ describe "SeamlessDatabasePoolAdapter" do
       expect(read_connection_1).to receive(:select).with('SQL').and_return(:retval)
       pool_connection.send(:select, 'SQL').should == :retval
     end
-  
+
     it "should proxy execute methods to a read connection" do
       expect(pool_connection).to receive(:current_read_connection).and_return(read_connection_1)
       expect(read_connection_1).to receive(:execute).with('SQL').and_return(:retval)
       pool_connection.execute('SQL').should == :retval
     end
-  
+
     it "should proxy select_rows methods to a read connection" do
       expect(pool_connection).to receive(:current_read_connection).and_return(read_connection_1)
       expect(read_connection_1).to receive(:select_rows).with('SQL').and_return(:retval)
       pool_connection.select_rows('SQL').should == :retval
     end
+
+    it "should proxy exec_query methods to a read connection" do
+      expect(pool_connection).to receive(:current_read_connection).and_return(read_connection_1)
+      expect(read_connection_1).to receive(:exec_query).with('SQL').and_return(:retval)
+      pool_connection.exec_query('SQL').should == :retval
+    end
   end
-  
+
   context "master connection methods" do
     it "should proxy insert method to the master connection" do
       expect(master_connection).to receive(:insert).with('SQL').and_return(:retval)
