@@ -86,7 +86,7 @@ module ActiveRecord
           return const_get(adapter_class_name) if const_defined?(adapter_class_name, false)
           
           # Define methods to proxy to the appropriate pool
-          read_only_methods = [:select, :select_rows, :execute, :tables, :columns]
+          read_only_methods = [:select, :select_rows, :execute, :tables, :columns, :exec_query]
           clear_cache_methods = [:insert, :update, :delete]
           
           # Get a list of all methods redefined by the underlying adapter. These will be
@@ -171,6 +171,11 @@ module ActiveRecord
       # Returns an array of the master connection and the read pool connections
       def all_connections
         [@master_connection] + @read_connections
+      end
+
+      # Returns the raw_connection for master
+      def raw_connection
+        @master_connection.raw_connection
       end
       
       # Get the pool weight of a connection
