@@ -14,9 +14,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.required_ruby_version = '~> 2.0'
 
-  spec.add_runtime_dependency(%q<activerecord>, [">= 3.2.0"])
-  spec.add_development_dependency(%q<rspec>, [">= 2.0"])
-  spec.add_development_dependency(%q<sqlite3>, [">= 0"])
-  spec.add_development_dependency(%q<mysql>, [">= 0"])
-  spec.add_development_dependency(%q<pg>, [">= 0"])
+  spec.add_runtime_dependency 'activerecord'
+  spec.add_development_dependency 'bundler', '~> 1.5'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'sqlite3'
+  spec.add_development_dependency 'mysql'
+  spec.add_development_dependency 'pg'
 end
