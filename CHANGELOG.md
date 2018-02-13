@@ -1,3 +1,11 @@
+# 1.0.21
+
+* Add proxy for `raw_connection` to master connection (thanks tripwar)
+
+* Add `exec_query` to read only method list (thanks to liyan1688 & taminomartinius)
+
+* Fix Travis CI (thanks to taminomartinius & annaswims)
+
 ## 1.0.20
 
 * Remove calls to `alias_method_chain` for Rails 5.1 compatibility (thanks yukideluxe & wjordan)
