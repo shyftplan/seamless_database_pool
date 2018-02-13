@@ -1,8 +1,8 @@
 module ActiveRecord
   class Base
     def self.read_only_connection(config)
-      real_adapter = config.delete("real_adapter")
-      connection = send("#{real_adapter}_connection", config.merge("adapter" => real_adapter))
+      real_adapter = config.delete('real_adapter')
+      connection = send("#{real_adapter}_connection", config.merge('adapter' => real_adapter))
       ConnectionAdapters::ReadOnlyAdapter.new(connection)
     end
   end

@@ -26,46 +26,46 @@ describe SeamlessDatabasePool::ConnectionStatistics do
     end
   end
 
-  it "should increment statistics on update" do
+  it 'should increment statistics on update' do
     connection = SeamlessDatabasePool::ConnectionStatisticsTester.new
-    connection.update('SQL', 'name').should == "UPDATE SQL/name"
+    connection.update('SQL', 'name').should == 'UPDATE SQL/name'
     connection.connection_statistics.should == {:update => 1}
-    connection.update('SQL 2').should == "UPDATE SQL 2/"
+    connection.update('SQL 2').should == 'UPDATE SQL 2/'
     connection.connection_statistics.should == {:update => 2}
   end
 
-  it "should increment statistics on insert" do
+  it 'should increment statistics on insert' do
     connection = SeamlessDatabasePool::ConnectionStatisticsTester.new
-    connection.insert('SQL', 'name').should == "INSERT SQL/name"
+    connection.insert('SQL', 'name').should == 'INSERT SQL/name'
     connection.connection_statistics.should == {:insert => 1}
-    connection.insert('SQL 2').should == "INSERT SQL 2/"
+    connection.insert('SQL 2').should == 'INSERT SQL 2/'
     connection.connection_statistics.should == {:insert => 2}
   end
 
-  it "should increment statistics on execute" do
+  it 'should increment statistics on execute' do
     connection = SeamlessDatabasePool::ConnectionStatisticsTester.new
-    connection.execute('SQL', 'name').should == "EXECUTE SQL/name"
+    connection.execute('SQL', 'name').should == 'EXECUTE SQL/name'
     connection.connection_statistics.should == {:execute => 1}
-    connection.execute('SQL 2').should == "EXECUTE SQL 2/"
+    connection.execute('SQL 2').should == 'EXECUTE SQL 2/'
     connection.connection_statistics.should == {:execute => 2}
   end
 
-  it "should increment statistics on select" do
+  it 'should increment statistics on select' do
     connection = SeamlessDatabasePool::ConnectionStatisticsTester.new
-    connection.send(:select, 'SQL', 'name').should == "SELECT SQL/name"
+    connection.send(:select, 'SQL', 'name').should == 'SELECT SQL/name'
     connection.connection_statistics.should == {:select => 1}
-    connection.send(:select, 'SQL 2').should == "SELECT SQL 2/"
+    connection.send(:select, 'SQL 2').should == 'SELECT SQL 2/'
     connection.connection_statistics.should == {:select => 2}
   end
 
-  it "should increment counts only once within a block" do
+  it 'should increment counts only once within a block' do
     connection = SeamlessDatabasePool::ConnectionStatisticsTester.new
     expect(connection).to receive(:execute).with('SQL')
     connection.update('SQL')
     connection.connection_statistics.should == {:update => 1}
   end
 
-  it "should be able to clear the statistics" do
+  it 'should be able to clear the statistics' do
     connection = SeamlessDatabasePool::ConnectionStatisticsTester.new
     connection.update('SQL')
     connection.connection_statistics.should == {:update => 1}
