@@ -141,7 +141,7 @@ terribly useful, so you should really specify a method of using the read pool
 for the actions that need it. Read connections will only be used for select
 statements against the database.
 
-This is done with static methods on `SeamlessDatabasePool`.
+This is done with static methods on [SeamlessDatabasePool](http://www.rubydoc.info/github/bdurand/seamless_database_pool/SeamlessDatabasePool).
 
 ```ruby
 SeamlessDatabasePool.use_persistent_read_connection do
@@ -156,4 +156,4 @@ filters are provided to invoke the above connection methods in a block. These
 are not implemented as standard controller filters so that the connection
 methods can be in effect for other filters.
 
-See `SeamlessDatabasePool::ControllerFilter` for more details.
+See [SeamlessDatabasePool::ControllerFilter](http://www.rubydoc.info/github/bdurand/seamless_database_pool/SeamlessDatabasePool/ControllerFilter) for more details.
