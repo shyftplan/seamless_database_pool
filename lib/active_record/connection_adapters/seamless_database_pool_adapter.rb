@@ -39,8 +39,8 @@ module ActiveRecord
       end
 
       def establish_adapter(adapter)
-        raise AdapterNotSpecified.new("database configuration does not specify adapter") unless adapter
-        raise AdapterNotFound.new("database pool must specify adapters") if adapter == 'seamless_database_pool'
+        raise AdapterNotSpecified.new('database configuration does not specify adapter') unless adapter
+        raise AdapterNotFound.new('database pool must specify adapters') if adapter == 'seamless_database_pool'
 
         begin
           require 'rubygems'
@@ -308,12 +308,12 @@ module ActiveRecord
         available = @available_read_connections.last
         if available.expired?
           begin
-            @logger.info("Adding dead database connection back to the pool") if @logger
+            @logger.info('Adding dead database connection back to the pool') if @logger
             available.reconnect!
           rescue => e
             # Couldn't reconnect so try again in a little bit
             if @logger
-              @logger.warn("Failed to reconnect to database when adding connection back to the pool")
+              @logger.warn('Failed to reconnect to database when adding connection back to the pool')
               @logger.warn(e)
             end
             available.expires = 30.seconds.from_now
@@ -349,7 +349,7 @@ module ActiveRecord
         return if connections.length == available.length
 
         if connections.empty?
-          @logger.warn("All read connections are marked dead; trying them all again.") if @logger
+          @logger.warn('All read connections are marked dead; trying them all again.') if @logger
           # No connections available so we might as well try them all again
           reset_available_read_connections
         else

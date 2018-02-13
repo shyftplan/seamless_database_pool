@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "SeamlessDatabasePool::ControllerFilter" do
+describe 'SeamlessDatabasePool::ControllerFilter' do
 
   module SeamlessDatabasePool
     class TestApplicationController
@@ -86,30 +86,30 @@ describe "SeamlessDatabasePool::ControllerFilter" do
   let(:session){Hash.new}
   let(:controller){SeamlessDatabasePool::TestOtherController.new(session)}
 
-  it "should work with nothing set" do
+  it 'should work with nothing set' do
     controller = SeamlessDatabasePool::TestApplicationController.new(session)
     controller.process('base_action').should == :master
   end
 
-  it "should allow setting a connection type for a single action" do
+  it 'should allow setting a connection type for a single action' do
     controller = SeamlessDatabasePool::TestBaseController.new(session)
     controller.process('read').should == :persistent
   end
 
-  it "should allow setting a connection type for actions" do
+  it 'should allow setting a connection type for actions' do
     controller.process('edit').should == :master
     controller.process('save').should == :master
   end
 
-  it "should allow setting a connection type for all actions" do
+  it 'should allow setting a connection type for all actions' do
     controller.process('other').should == :random
   end
 
-  it "should inherit the superclass' options" do
+  it 'should inherit the superclass\' options' do
     controller.process('read').should == :persistent
   end
 
-  it "should be able to force using the master connection on the next request" do
+  it 'should be able to force using the master connection on the next request' do
     # First request
     controller.process('read').should == :persistent
     controller.use_master_db_connection_on_next_request
@@ -121,7 +121,7 @@ describe "SeamlessDatabasePool::ControllerFilter" do
     controller.process('read').should == :persistent
   end
 
-  it "should not break trying to force the master connection if sessions are not enabled" do
+  it 'should not break trying to force the master connection if sessions are not enabled' do
     controller.process('read').should == :persistent
     controller.use_master_db_connection_on_next_request
 
@@ -130,20 +130,20 @@ describe "SeamlessDatabasePool::ControllerFilter" do
     controller.process('read').should == :persistent
   end
 
-  it "should force the master connection on the next request for a redirect in master connection block" do
+  it 'should force the master connection on the next request for a redirect in master connection block' do
     controller = SeamlessDatabasePool::TestOtherController.new(session)
     controller.process('redirect_master_action').should == {:action => :read}
 
     controller.process('read').should == :master
   end
 
-  it "should not force the master connection on the next request for a redirect not in master connection block" do
+  it 'should not force the master connection on the next request for a redirect not in master connection block' do
     controller.process('redirect_read_action').should == {:action => :read}
 
     controller.process('read').should == :persistent
   end
 
-  it "should work with a Rails 2 controller" do
+  it 'should work with a Rails 2 controller' do
     controller = SeamlessDatabasePool::TestRails2BaseController.new(session)
     controller.process('read').should == :persistent
   end
