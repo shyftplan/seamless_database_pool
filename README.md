@@ -120,6 +120,7 @@ development:
       pool_weight: 2
     - host: read-db-2.example.com
 ```
+
 In this configuration, the master connection will be a mysql connection to
 master-db.example.com:6000 using the username master_user and the password
 567pass.
