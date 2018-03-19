@@ -20,3 +20,6 @@ matrix:
     - rvm: rbx-1
     - rvm: rbx-2
     - rvm: rbx-3
+
+notifications:
+  slack: shyftplanteam:ytcBo8O4FsF6i11yzoCmfvTU
