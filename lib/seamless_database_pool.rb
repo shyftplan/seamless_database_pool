@@ -132,7 +132,8 @@ module SeamlessDatabasePool
     # tasks which only support known adapters.
     def master_database_configuration(database_configs)
       configs = {}
-      database_configs.each do |key, values|
+      database_configs.configs_for.each do |env_config|
+        values = env_config.config.deep_dup
         if values['adapter'] == 'seamless_database_pool'
           values['adapter'] = values.delete('pool_adapter')
           values = values.merge(values['master']) if values['master'].is_a?(Hash)
@@ -140,9 +141,9 @@ module SeamlessDatabasePool
           values.delete('master')
           values.delete('read_pool')
         end
-        configs[key] = values
+        configs[env_config.env_name] = values
       end
-      configs
+      ActiveRecord::DatabaseConfigurations.new(configs)
     end
   end
 end

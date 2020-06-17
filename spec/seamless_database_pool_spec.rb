@@ -150,17 +150,19 @@ describe 'SeamlessDatabasePool' do
         'database' => 'test'
       }
     }
-    SeamlessDatabasePool.master_database_configuration(config).should == {
-      'development' => {
-        'adapter' => 'mysql2',
-        'database' => 'development',
-        'username' => 'root',
-        'host' => 'localhost'
-      },
-      'test' => {
-        'adapter' => 'mysql2',
-        'database' => 'test'
-      }
-    }
+    rails_config = ActiveRecord::DatabaseConfigurations.new(config)
+    SeamlessDatabasePool.master_database_configuration(rails_config).should ==
+      ActiveRecord::DatabaseConfigurations.new({
+        'development' => {
+          'adapter' => 'mysql2',
+          'database' => 'development',
+          'username' => 'root',
+          'host' => 'localhost'
+        },
+        'test' => {
+          'adapter' => 'mysql2',
+          'database' => 'test'
+        }
+      })
   end
 end
