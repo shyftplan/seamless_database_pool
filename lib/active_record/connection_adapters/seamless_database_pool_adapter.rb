@@ -87,7 +87,7 @@ module ActiveRecord
 
           # Define methods to proxy to the appropriate pool
           read_only_methods = [:select, :select_rows, :execute, :tables, :columns, :exec_query]
-          clear_cache_methods = [:insert, :update, :delete]
+          clear_cache_methods = [:insert, :update, :delete, :transaction]
 
           # Get a list of all methods redefined by the underlying adapter. These will be
           # proxied to the master connection.
@@ -185,12 +185,6 @@ module ActiveRecord
 
       def requires_reloading?
         false
-      end
-
-      def transaction(options = {})
-        use_master_connection do
-          super
-        end
       end
 
       def visitor=(visitor)
